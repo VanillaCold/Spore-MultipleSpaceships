@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mod description="Multiple spaceships in Spore" displayName="Spore - Multiple Spaceships" dllsBuild="$SPOREMOD_DLLS_BUILD" hasCustomInstaller="false" installerSystemVersion="1.0.1.2" isExperimental="$SPOREMOD_EXPERIMENTAL" unique="Spore-MultipleSpaceships">
+  <prerequisite game="GalacticAdventures">VanillaCold_MultipleSpaceships.package</prerequisite>
+</mod>
