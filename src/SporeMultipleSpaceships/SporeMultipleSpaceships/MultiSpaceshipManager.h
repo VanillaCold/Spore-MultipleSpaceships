@@ -25,7 +25,7 @@ class cMultiSpaceshipManager
 : public Simulator::cStrategy
 {
 public:
-    static const uint32_t TYPE = id("VanillaCold::cMultiSpaceshipManager");
+    static const uint32_t TYPE = id("VanillaCold::MultiSpaceshipManager");
     static const uint32_t NOUN_ID = TYPE;
 
     int AddRef() override;
@@ -36,9 +36,9 @@ public:
     virtual bool Write(Simulator::ISerializerStream* stream) override;
     virtual bool Read(Simulator::ISerializerStream* stream) override;
     void Update(int deltaTime, int deltaGameTime) override;
-    virtual bool WriteToXML( Simulator::XmlSerializer* writexml);
-    //virtual void OnModeEntered(uint32_t previousModeID,
-    //                           uint32_t newModeID) override;
+    virtual bool WriteToXML( Simulator::XmlSerializer* writexml) override;
+    virtual void OnModeEntered(uint32_t previousModeID,
+                               uint32_t newModeID) override;
 
     bool SwitchSpaceship(int _index);
     uint32_t CreateSpaceship();
@@ -46,13 +46,14 @@ public:
     uint32_t GetSpaceshipCount();
     uint32_t GetActiveSpaceship();
 
-    vector<cPlayerSpaceshipDataPtr> mStoredSpaceships;
+    static Simulator::Attribute ATTRIBUTES[];
+    static cMultiSpaceshipManager* Get();
+
     int mCurrentIndex;
+    vector<cPlayerSpaceshipDataPtr> mStoredSpaceships;
     //
     // You can add more methods here
     //
-     static cMultiSpaceshipManager* Get();
-     static Simulator::Attribute ATTRIBUTES[];
 
 private:
     static cMultiSpaceshipManager* sInstance;

@@ -5,8 +5,8 @@
 
 void Initialize()
 {
+	CheatManager.AddCheat("SpaceshipCheat", new SpaceshipCheat());
 	SimulatorSystem.AddStrategy(new cMultiSpaceshipManager(), cMultiSpaceshipManager::NOUN_ID);
-	CheatManager.AddCheat("SpaceshipCheatThing", new SpaceshipCheat());
 }
 
 void Dispose()

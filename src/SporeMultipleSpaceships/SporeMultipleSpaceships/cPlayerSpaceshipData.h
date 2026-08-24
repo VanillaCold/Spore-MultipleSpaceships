@@ -22,7 +22,7 @@ class cPlayerSpaceshipData
 
     static Simulator::Attribute ATTRIBUTES[];
 public:
-    static const uint32_t TYPE = id("PlayerSpaceshipData");
+    static const uint32_t TYPE = id("VanillaCold::cPlayerSpaceshipData");
     static const uint32_t NOUN_ID = TYPE;
     static const char* GetName();
 

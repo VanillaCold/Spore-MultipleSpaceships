@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "cPlayerSpaceshipData.h"
 #include <Spore/Simulator/Serialization.h>
-
+ 
 
 const char* cPlayerSpaceshipData::GetName() {
     return "VanillaCold::cPlayerSpaceshipData";
