@@ -1,8 +1,12 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
+#include "MultiSpaceshipManager.h"
 #include "stdafx.h"
+#include "SpaceshipCheat.h"
 
 void Initialize()
 {
+	SimulatorSystem.AddStrategy(new cMultiSpaceshipManager(), cMultiSpaceshipManager::NOUN_ID);
+	CheatManager.AddCheat("SpaceshipCheatThing", new SpaceshipCheat());
 }
 
 void Dispose()

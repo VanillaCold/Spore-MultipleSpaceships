@@ -4,40 +4,28 @@
 #include <Spore\Simulator\Serialization.h>
 #include <Spore/Simulator/cSpaceInventory.h>
 #include <Spore/Simulator/SubSystem/SpaceTrading.h>
+#include "cPlayerSpaceshipData.h"
 #include <vector>
 #include <set>
 
-#define MultiSpaceshipManagerPtr intrusive_ptr<MultiSpaceshipManager>
+#define cMultiSpaceshipManagerPtr intrusive_ptr<cMultiSpaceshipManager>
+
+#define MultiSpaceshipManager (cMultiSpaceshipManager::Get())[0]
 
 ///
 /// In your dllmain Initialize method, add the system like this:
 /// ModAPI::AddSimulatorStrategy(new MultiSpaceshipManager(), MultiSpaceshipManager::NOUN_ID);
 ///
 
-struct PlayerSpaceshipData
-{
-    bool mbActive;
-    cStarRecordPtr mPosition;
-    vector<cSpaceInventoryItemPtr> mCargoItems;
-    float mHealth;
-    float mEnergy;
 
-    PlayerSpaceshipData()
-    {
-        mbActive = false;
-        mPosition = nullptr;
-        mHealth = 0;
-        mEnergy = 0;
-    }
-};
 
-class MultiSpaceshipManager
+
+
+class cMultiSpaceshipManager
 : public Simulator::cStrategy
 {
-    vector<PlayerSpaceshipData> mStoredSpaceships;
-    int mCurrentIndex;
 public:
-    static const uint32_t TYPE = id("MultiSpaceshipManager");
+    static const uint32_t TYPE = id("VanillaCold::cMultiSpaceshipManager");
     static const uint32_t NOUN_ID = TYPE;
 
     int AddRef() override;
@@ -49,21 +37,25 @@ public:
     virtual bool Read(Simulator::ISerializerStream* stream) override;
     void Update(int deltaTime, int deltaGameTime) override;
     virtual bool WriteToXML( Simulator::XmlSerializer* writexml);
-    virtual void OnModeEntered(uint32_t previousModeID,
-                               uint32_t newModeID) override;
+    //virtual void OnModeEntered(uint32_t previousModeID,
+    //                           uint32_t newModeID) override;
 
     bool SwitchSpaceship(int _index);
-    int CreateSpaceship();
+    uint32_t CreateSpaceship();
     bool DestroySpaceship(bool _keepCargo);
+    uint32_t GetSpaceshipCount();
+    uint32_t GetActiveSpaceship();
 
+    vector<cPlayerSpaceshipDataPtr> mStoredSpaceships;
+    int mCurrentIndex;
     //
     // You can add more methods here
     //
-     static MultiSpaceshipManager* Get();
+     static cMultiSpaceshipManager* Get();
      static Simulator::Attribute ATTRIBUTES[];
 
 private:
-    static MultiSpaceshipManager* sInstance;
+    static cMultiSpaceshipManager* sInstance;
     //
     // You can add members here
     //
