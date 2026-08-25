@@ -1,2 +1,3 @@
 # Spore - Multiple Spaceships
-You can download the mod in the Releases page.
+This mod is not finished yet.
+(currently i am having trouble developing it)
